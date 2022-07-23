@@ -26,7 +26,7 @@ def UCI_preprocessing(data,split_ratio=0.8,reduce_train=1.):
 def load_UCI_data(csv_file,root_dir,flag_normalize=True,min_data=0.,normalization='True_Normal',flag_shuffle=True):
     path = root_dir + '/d' + csv_file + '.xls'
     Data = pd.read_excel(path)
-    Data_mat = Data.as_matrix()
+    Data_mat = Data.values
     if flag_normalize == True:
         if normalization == 'True_Normal':
             Data_std = preprocessing.scale(Data_mat)
@@ -47,9 +47,9 @@ class base_UCI_Dataset_PABELGAM(Dataset):
     '''
     Most simple dataset by explicit giving train and test data
     '''
-    def __init__(self,data,transform=None,flag_GPU=True):
+    def __init__(self,data,transform=None,flag_GPU=False):
         self.Data=data
-        self.Data=torch.from_numpy(data).float().cuda()
+        self.Data=torch.from_numpy(data).float()
         self.flag_GPU=flag_GPU
         self.transform=transform
     def __len__(self):
@@ -59,9 +59,9 @@ class base_UCI_Dataset_PABELGAM(Dataset):
         sample_y=self.Data[idx,-1:]
         if self.transform and self.flag_GPU==True:
             sample_x=self.transform(sample_x)
-            sample_x=sample_x.cuda()
+            sample_x=sample_x
             sample_y = self.transform(sample_y)
-            sample_y = sample_y.cuda()
+            sample_y = sample_y
         elif self.transform and not self.flag_GPU:
             sample_x=self.transform(sample_x)
             sample_y=self.transform(sample_y)
@@ -76,7 +76,7 @@ class ToTensor(object):
         return torch.from_numpy(sample).float()
 
 def Test_UCI(model,log_likelihood_func,W_sample,overall_test,sigma_out,split=3):
-    overall_test=torch.from_numpy(overall_test).float().cuda()
+    overall_test=torch.from_numpy(overall_test).float()
     test_input=overall_test[:,0:-1]
     test_target=overall_test[:,-1:]
     test_size=test_input.shape[0]

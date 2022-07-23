@@ -13,10 +13,13 @@ from PA_BELGAM.PA_BELGAM_infer import *
 import os
 import random
 
-os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"]='0'
-torch.set_default_tensor_type('torch.cuda.FloatTensor')
-rand_seed_list=[20,30,40,50,60,70,80,90,100,110]
+#os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
+#os.environ["CUDA_VISIBLE_DEVICES"]='0'
+#torch.set_default_tensor_type('torch.cuda.FloatTensor')
+torch.set_default_tensor_type('torch.FloatTensor')
+
+#rand_seed_list=[20,30,40,50,60,70,80,90,100,110]
+rand_seed_list=[20]
 ratio_list=[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.]
 
 # rand_seed_list=[20,30,40,50,60,70,80,90,100,110]
