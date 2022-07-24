@@ -52,7 +52,7 @@ def least_one_left_mask(mask,mask_drop):
         else:
             pos_test=pos
         mask_one[row_idx, pos_test] = 1
-    mask_one=torch.from_numpy(mask_one).float().cuda()
+    mask_one=torch.from_numpy(mask_one).float()
 
     mask_dropped[zero_row,:]=mask_one[zero_row,:]
     return mask_dropped

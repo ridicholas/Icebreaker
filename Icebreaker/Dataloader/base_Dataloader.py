@@ -32,7 +32,7 @@ class base_UCI(object):
         '''
         self.path = root_dir + '/d' + csv_file + '.xls'
         self.Data = pd.read_excel(self.path)
-        self.Data_mat = self.Data.as_matrix()
+        self.Data_mat = self.Data.values
         self.obs_dim = self.Data_mat.shape[1]
         self.test_size = test_size
         self.csv_file = csv_file
@@ -114,7 +114,7 @@ class base_UCI_Dataset(Dataset):
         sample=self.Data[idx,:]
         if self.transform and self.flag_GPU==True:
             sample=self.transform(sample)
-            sample=sample.cuda()
+            sample=sample
         elif self.transform and not self.flag_GPU:
             sample=self.transform(sample)
         return sample
@@ -498,7 +498,7 @@ class movielens_dataset_batch(Dataset):
         if self.transform:
             sample=self.transform(sample)
             if self.flag_GPU==True:
-                sample=sample.cuda()
+                sample=sample
         return sample
 def restore_orig_matrix(current_matrix,dict_idx):
     orig_idx_list=[]

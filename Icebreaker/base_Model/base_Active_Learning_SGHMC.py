@@ -42,9 +42,9 @@ class base_Active_Learning_SGHMC(object):
         self.init_observed_train[self.train_data.shape[0]-pretrain_data.shape[0]:,:]=pretrain_data
 
 
-        self.train_data_tensor=torch.from_numpy(self.train_data).float().cuda()
-        self.pretrain_data_tensor=torch.from_numpy(pretrain_data).float().cuda()
-        self.init_observed_train_tensor=torch.from_numpy(self.init_observed_train).float().cuda()
+        self.train_data_tensor=torch.from_numpy(self.train_data).float()
+        self.pretrain_data_tensor=torch.from_numpy(pretrain_data).float()
+        self.init_observed_train_tensor=torch.from_numpy(self.init_observed_train).float()
         self.train_pool_tensor=self.train_data_tensor.clone().detach()
         if self.flag_clear_target_train:
             self.train_pool_tensor[:,target_dim]=0. # Remove the target dim
@@ -101,17 +101,17 @@ class base_Active_Learning_SGHMC(object):
         # transform to tensor
         self.valid_data_input=valid_data*valid_mask_input
         self.valid_data_target = valid_data * valid_mask_target
-        self.valid_data_tensor=torch.from_numpy(self.valid_data).float().cuda()
-        self.valid_data_target_tensor=torch.from_numpy(self.valid_data_target).float().cuda()
-        self.valid_data_input_tensor = torch.from_numpy(self.valid_data_input).float().cuda()
+        self.valid_data_tensor=torch.from_numpy(self.valid_data).float()
+        self.valid_data_target_tensor=torch.from_numpy(self.valid_data_target).float()
+        self.valid_data_input_tensor = torch.from_numpy(self.valid_data_input).float()
 
         self.test_input = test_data * test_mask
         self.test_target = test_data * target_mask
-        self.test_target_tensor = torch.from_numpy(self.test_target).float().cuda()
-        self.test_input_tensor = torch.from_numpy(self.test_input).float().cuda()
-        self.train_data_tensor=torch.from_numpy(self.train_data).float().cuda()
+        self.test_target_tensor = torch.from_numpy(self.test_target).float()
+        self.test_input_tensor = torch.from_numpy(self.test_input).float()
+        self.train_data_tensor=torch.from_numpy(self.train_data).float()
         self.init_observed_train=np.zeros(self.train_data_tensor.shape)
-        self.init_observed_train_tensor=torch.from_numpy(self.init_observed_train).float().cuda()
+        self.init_observed_train_tensor=torch.from_numpy(self.init_observed_train).float()
         self.train_pool_tensor=torch.tensor(self.train_data_tensor.data)
         if self.flag_clear_target_train==True:
             self.train_pool_tensor[:,target_dim]=0. # Remove the target variable
@@ -128,23 +128,23 @@ class base_Active_Learning_SGHMC(object):
         np.save(filepathname+'valid_data_target.npy',self.valid_data_target)
     def _load_data(self,filepathname,target_dim=-1):
         self.train_data=np.load(filepathname+'train_data.npy')
-        self.train_data_tensor = torch.from_numpy(self.train_data).float().cuda()
+        self.train_data_tensor = torch.from_numpy(self.train_data).float()
         self.test_input=np.load(filepathname+'test_input_data.npy')
-        self.test_input_tensor = torch.from_numpy(self.test_input).float().cuda()
+        self.test_input_tensor = torch.from_numpy(self.test_input).float()
         self.test_target=np.load(filepathname+'test_target_data.npy')
-        self.test_target_tensor = torch.from_numpy(self.test_target).float().cuda()
+        self.test_target_tensor = torch.from_numpy(self.test_target).float()
 
         self.valid_data=np.load(filepathname+'valid_data.npy')
-        self.valid_data_tensor=torch.from_numpy(self.valid_data).float().cuda()
+        self.valid_data_tensor=torch.from_numpy(self.valid_data).float()
 
         self.valid_data_input=np.load(filepathname+'valid_data_input.npy')
-        self.valid_data_input_tensor = torch.from_numpy(self.valid_data_input).float().cuda()
+        self.valid_data_input_tensor = torch.from_numpy(self.valid_data_input).float()
 
         self.valid_data_target=np.load(filepathname+'valid_data_target.npy')
-        self.valid_data_target_tensor=torch.from_numpy(self.valid_data_target).float().cuda()
+        self.valid_data_target_tensor=torch.from_numpy(self.valid_data_target).float()
 
         self.init_observed_train = np.zeros(self.train_data_tensor.shape)
-        self.init_observed_train_tensor = torch.from_numpy(self.init_observed_train).float().cuda()
+        self.init_observed_train_tensor = torch.from_numpy(self.init_observed_train).float()
         self.train_pool_tensor = torch.tensor(self.train_data_tensor.data)
         if self.flag_clear_target_train == True:
             self.train_pool_tensor[:, target_dim] = 0.  # Remove the target variable

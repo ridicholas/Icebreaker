@@ -4,6 +4,7 @@ from Dataloader.base_mask import *
 import copy
 import pickle
 import yaml
+from yaml import Loader
 import math
 from prettytable import PrettyTable
 #from Dataloader.base_Dataloader import base_UCI_Dataset
@@ -386,7 +387,7 @@ def remove_ratings(X,rating=1):
 
 def ReadYAML(Filename):
     with open(Filename,'r') as ymlfile:
-        cfg=yaml.load(ymlfile)
+        cfg=yaml.load(ymlfile, Loader)
     return cfg
 def KL_Schedule(ep,**kwargs):
     schedule=kwargs['schedule']

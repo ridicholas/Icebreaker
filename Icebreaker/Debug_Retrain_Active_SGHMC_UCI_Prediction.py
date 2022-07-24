@@ -31,7 +31,7 @@ from Icebreaker.base_Model.base_Active_Learning_SGHMC import *
 import random
 
 
-torch.set_default_tensor_type('torch.cuda.FloatTensor')
+torch.set_default_tensor_type('torch.FloatTensor')
 
 
 parser = argparse.ArgumentParser(description='SEDDI Active Learning + Testing')
@@ -352,7 +352,7 @@ for runs in range(num_runs):
     # filename_data = cfg['File_Settings']['Result_path']
     # #pretrain_data=np.load(filename_data+'Stored_Data/Active_Learning_W_UCI1_SGHMC_ep2000_step50_total1500_CTTest_Conditional0.8_BALD0.92_Balance0.5_Temp0.25p0_Drop0.2_Sigma0.3_UpdateEncoder_WeightTar1_eps3e-5_Adam0.003_ProbSelect_ALTest_BALD_datanum_1000_Seed_730.npy')
     # pretrain_data=np.load(filename_data+'Stored_Data/Active_Learning_W_UCI1_SGHMC_ep2000_step25_total1000_CTTest_Conditional0.8_BALD0.92_Balance0.5_Temp0.25p0_Drop0.2_Sigma0.4_UpdateEncoder_WeightTar1_eps5e-5_Adam0.003_ProbSelect_Alpha_ALTest_BALD_datanum_1000_Seed_730.npy')
-    # pretrain_data=torch.from_numpy(pretrain_data).float().cuda()
+    # pretrain_data=torch.from_numpy(pretrain_data).float()
     #
     # # Pretrain
     Active_RAND_PNP.train_BNN( flag_pretrain=True,

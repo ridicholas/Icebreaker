@@ -105,3 +105,5 @@ venv.bak/
 
 #data
 uci/
+UCI0/
+*.pkl

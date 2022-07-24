@@ -380,7 +380,7 @@ class base_Active_Learning_Decoder(base_Active_Learning):
                     #Drop_p_var=Drop_p
                     #
                     mask_drop = np.array([bernoulli.rvs(1 - Drop_p_var, size=data.shape[1])] * data.shape[0])
-                    mask_drop = torch.from_numpy(mask_drop).float().cuda()
+                    mask_drop = torch.from_numpy(mask_drop).float()
                     if flag_hybrid:
                         mask_drop_hybrid=torch.tensor(mask_drop.data)
                         mask_drop_hybrid[:,target_dim]=1. # Reserve the target dim

@@ -31,7 +31,7 @@ import random
 
 
 
-torch.set_default_tensor_type('torch.cuda.FloatTensor')
+torch.set_default_tensor_type('torch.FloatTensor')
 
 
 parser = argparse.ArgumentParser(description='SEDDI Active Learning Imputation')
@@ -88,7 +88,7 @@ num_runs=1
 
 
 
-filepath_out = cwd+'/Results/Movielens'
+filepath_out = cwd+'/Results/UCI0'
 
 
 

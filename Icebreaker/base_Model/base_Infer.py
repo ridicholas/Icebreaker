@@ -77,7 +77,7 @@ def train_SGHMC(Infer_model,observed_train,eps=0.01,max_sample_size=20,tot_epoch
             mask = get_mask(data)
             Drop_p_var = np.minimum(np.random.rand(1), Drop_p)
             mask_drop = np.array([bernoulli.rvs(1 - Drop_p_var, size=data.shape[1])] * data.shape[0])
-            mask_drop = torch.from_numpy(mask_drop).float().cuda()
+            mask_drop = torch.from_numpy(mask_drop).float()
 
 
             if flag_hybrid:
@@ -468,7 +468,7 @@ class SGHMC(base_Infer):
                 mask = get_mask(data)
                 Drop_p_var = np.minimum(np.random.rand(1), Drop_p)
                 mask_drop = np.array([bernoulli.rvs(1 - Drop_p_var, size=data.shape[1])] * data.shape[0])
-                mask_drop = torch.from_numpy(mask_drop).float().cuda()
+                mask_drop = torch.from_numpy(mask_drop).float()
 
                 if flag_hybrid:
                     mask_drop_hybrid = torch.tensor(mask_drop.data)
